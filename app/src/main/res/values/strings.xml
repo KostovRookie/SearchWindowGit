@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Приложение</string>
-    <string name="enter_to_search_here">търсене из github</string>
+    <string name="app_name">Търсачка</string>
+    <string name="enter_to_search_here">Потребители из github</string>
     <string name="search">Търси</string>
 </resources>

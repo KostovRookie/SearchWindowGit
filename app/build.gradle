@@ -2,6 +2,11 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlinx-serialization'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+
+
+
 
 android {
     compileSdkVersion 33
@@ -51,9 +56,31 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1' // serializaton
     implementation 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0'
 
+
+
+    //viewModel compose
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1"
+
     implementation "com.squareup.okhttp3:okhttp:5.0.0-alpha.10"
 
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.10'
 
 
+
+    // Hilt dependencies
+    implementation "com.google.dagger:hilt-android:2.44.1"
+    kapt "com.google.dagger:hilt-android-compiler:2.44.1"
+
+
+
+
+
+
+
+
+
+
+}
+kapt {
+    correctErrorTypes true
 }

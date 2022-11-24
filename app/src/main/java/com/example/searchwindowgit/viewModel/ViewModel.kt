@@ -6,11 +6,15 @@ import androidx.lifecycle.ViewModel
 import com.example.searchwindowgit.dataClass.SearchList
 import com.example.searchwindowgit.retrofitFactory.RetroInstance
 import com.example.searchwindowgit.retrofitFactory.RetroService
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ViewModel: ViewModel() {
+
+@AndroidEntryPoint
+
+class ViewModel : ViewModel() {
 
     var searchListData: MutableLiveData<SearchList> = MutableLiveData()
 
@@ -19,19 +23,16 @@ class ViewModel: ViewModel() {
         return searchListData
     }
 
-    fun apiGetCalls(input: String) {
+    fun apiGetCalls() {
 
-       val retroInstance = RetroInstance.getRetroInstance().create(RetroService::class.java)
-
-        //java.lang.IllegalArgumentException: Unable to create converter
-        // for class com.example.searchwindowgit.dataClass.RecyclerList
+        val retroInstance = RetroInstance.getRetroInstance().create(RetroService::class.java)
 
 
-        val call = retroInstance.getApiFromHub(input)  // can't get the getApiFromHub(@Query("q") query: String
+        val call = retroInstance.getApiFromHub()
 
         call.enqueue(object : Callback<SearchList> {
             override fun onResponse(call: Call<SearchList>, response: Response<SearchList>) {
-                if(response.isSuccessful) {
+                if (response.isSuccessful) {
                     Log.d("Tag : work", response.body().toString())
 
                     searchListData.postValue(response.body())

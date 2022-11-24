@@ -1,8 +1,9 @@
 package com.example.searchwindowgit.adapterRecycleView
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
@@ -12,8 +13,7 @@ import kotlinx.android.synthetic.main.activity_recycler_view.*
 
 
 class RecyclerViewActivity : AppCompatActivity() {
-    lateinit var recyclerViewAdapter: RecyclerViewAdapter
-
+    private lateinit var recyclerViewAdapter: RecyclerViewAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recycler_view)
@@ -25,6 +25,7 @@ class RecyclerViewActivity : AppCompatActivity() {
 
     private fun initRecyclerView() {
         recyclerView.apply {
+            Log.d("Starting initRecycler", "applied")
             layoutManager = LinearLayoutManager(this@RecyclerViewActivity)
             recyclerViewAdapter = RecyclerViewAdapter()
             adapter = recyclerViewAdapter
@@ -36,19 +37,22 @@ class RecyclerViewActivity : AppCompatActivity() {
 
 
     private fun createData() {
+//
 
-
-        val viewModel = ViewModelProviders.of(this)[ViewModel::class.java]
+        val viewModel = ViewModelProvider(this).get(ViewModel::class.java)
         viewModel.getRecyclerListDataObserver().observe(this) {
 
+            it?.let {
 
-            recyclerViewAdapter.setListData(it.items)
-            recyclerViewAdapter.notifyDataSetChanged()
+                recyclerViewAdapter.setListData(it.items)
+                recyclerViewAdapter.notifyDataSetChanged()
+            }
+
 
 
         }
         searchButton.setOnClickListener {
-            viewModel.apiGetCalls(searchBoxId.text.toString())
+            viewModel.apiGetCalls()
         }
 
     }

@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.recyclerview_row.view.*
 
 class RecyclerViewAdapter: RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>() {
 
-    var items = ArrayList<RecyclerData>()
+    private var items = ArrayList<RecyclerData>()
 
     fun setListData(data: ArrayList<RecyclerData>) {
         this.items = data
@@ -38,13 +38,12 @@ class RecyclerViewAdapter: RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder
        private val image: ImageView = view.imageThumb
 
         fun bind(data: RecyclerData) {
-            title.text = data.name
+            title.text = data.login // user name binding
 
-            //image avatar settings
-            val url = data.owner.avatar_url
+            //image avatar settings from glide
+            val url = data.avatar_url
             Glide.with(image)
                 .load(url)
-                .circleCrop()
                 .placeholder(R.drawable.default_thumb)
                 .error(R.drawable.default_thumb)
                 .fallback(R.drawable.default_thumb)
