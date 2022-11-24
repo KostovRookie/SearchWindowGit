@@ -6,15 +6,14 @@ import androidx.lifecycle.ViewModel
 import com.example.searchwindowgit.dataClass.SearchList
 import com.example.searchwindowgit.retrofitFactory.RetroInstance
 import com.example.searchwindowgit.retrofitFactory.RetroService
-import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-
-@AndroidEntryPoint
-
-class ViewModel : ViewModel() {
+@HiltViewModel
+class ViewModel @Inject constructor() : ViewModel() {
 
     var searchListData: MutableLiveData<SearchList> = MutableLiveData()
 
